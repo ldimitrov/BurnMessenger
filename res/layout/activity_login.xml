@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity" >
+
+    <EditText
+        android:id="@+id/usernameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/username_hint" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/usernameField"
+        android:layout_below="@+id/usernameField"
+        android:ems="10"
+        android:hint="@string/password_hint" 
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/signUpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:text="@string/sign_up_text" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/passwordField"
+        android:layout_marginTop="39dp"
+        android:hint="@string/login_button_label" />
+
+</RelativeLayout>
