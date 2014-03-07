@@ -3,12 +3,9 @@ package com.ldimitrov.burnmessenger;
 import java.util.Locale;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.ldimitrov.burnmessenger.MainActivity.DummySectionFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -25,20 +22,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		// getItem is called to instantiate the fragment for the given page.
-		// Return a DummySectionFragment (defined as a static inner class
-		// below) with the page number as its lone argument.
-		Fragment fragment = new DummySectionFragment();
-		Bundle args = new Bundle();
-		args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-		fragment.setArguments(args);
-		return fragment;
+		return new InboxFragment();
 	}
 
 	@Override
 	public int getCount() {
-		// Show 3 total pages.
-		return 3;
+		return 2;
 	}
 
 	@Override
