@@ -39,6 +39,9 @@ public class FriendsFragment extends ListFragment {
 
 		mCurrentUser = ParseUser.getCurrentUser();
 		mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+		//add progress bar from MainActivity
+		getActivity().setProgressBarIndeterminateVisibility(true);
+		
 		ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
 		query.addAscendingOrder(ParseConstants.KEY_USERNAME);
 
@@ -46,6 +49,7 @@ public class FriendsFragment extends ListFragment {
 				new FindCallback<ParseUser>() {
 					@Override
 					public void done(List<ParseUser> friends, ParseException e) {
+						getActivity().setProgressBarIndeterminateVisibility(false);
 						if(e == null){
 							mFriends = friends;
 							// use mFriends as data source for the list view of the
