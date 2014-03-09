@@ -36,4 +36,8 @@
         <item>Choose Video</item>
     </string-array>
 
+    <string name="title_activity_recepients">Choose Recepients</string>
+
+    <string name="empty_recepients_list_message">Choose some friends first!</string>
+
 </resources>
