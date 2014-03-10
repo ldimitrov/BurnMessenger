@@ -195,6 +195,10 @@ public class MainActivity extends FragmentActivity implements
 			
 			Intent recepientsIntent = new Intent(this, RecepientsActivity.class);
 			recepientsIntent.setData(mMediaUri);
+			//TODO - add checkes for video, message
+			String fileType;
+			fileType = ParseConstants.TYPE_IMAGE;
+			recepientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
 			startActivity(recepientsIntent);
 			
 		} 

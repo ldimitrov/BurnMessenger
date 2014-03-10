@@ -41,4 +41,12 @@
 
     <string name="empty_recepients_list_message">Choose some friends first!</string>
 
+    <string name="error_selecting_file">There was an error with the selected file!</string>
+
+    <string name="error_selecting_file_title">We are sorry!</string>
+
+    <string name="success_message">Message sent!</string>
+
+    <string name="error_sending_message">There was an error sending your message. Please try again.</string>
+
 </resources>
