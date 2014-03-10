@@ -28,7 +28,8 @@
     <string name="menu_camera_label">Camera</string>
     <string name="error_external_storage">There was a problem accessing your device\'s external storage</string>
     <string name="general_error">Sorry there was an error!</string>
-
+    <string name="action_send">Send</string>
+	
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>
@@ -36,7 +37,7 @@
         <item>Choose Video</item>
     </string-array>
 
-    <string name="title_activity_recepients">Choose Recepients</string>
+    <string name="title_activity_recepients">Choose Recipients</string>
 
     <string name="empty_recepients_list_message">Choose some friends first!</string>
 

@@ -11,9 +11,11 @@ import com.parse.ParseUser;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ public class RecepientsActivity extends ListActivity {
 	protected List<ParseUser> mFriends;
 	protected ParseRelation<ParseUser> mFriendsRelation;
 	protected ParseUser mCurrentUser;
+	protected MenuItem mSendMenuItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class RecepientsActivity extends ListActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_recepients);
 		setupActionBar();
+		
 		getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 	
@@ -87,9 +91,9 @@ public class RecepientsActivity extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.recepients, menu);
+		mSendMenuItem = menu.getItem(0);
 		return true;
 	}
 
@@ -98,11 +102,24 @@ public class RecepientsActivity extends ListActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch(item.getItemId()){
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		case R.id.action_send:
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	@Override
+	protected void onListItemClick(ListView list, View view, int position, long id) {
+		super.onListItemClick(list, view, position, id);
+		if(list.getCheckedItemCount() > 0){
+			mSendMenuItem.setVisible(true);
+		}
+		else {
+			mSendMenuItem.setVisible(false);
+		}
+	}
 }
