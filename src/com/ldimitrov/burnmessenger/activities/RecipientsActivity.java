@@ -28,8 +28,8 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class RecepientsActivity extends ListActivity {
-	public static final String TAG = RecepientsActivity.class.getSimpleName();
+public class RecipientsActivity extends ListActivity {
+	public static final String TAG = RecipientsActivity.class.getSimpleName();
 
 	protected List<ParseUser> mFriends;
 	protected ParseRelation<ParseUser> mFriendsRelation;
@@ -88,7 +88,7 @@ public class RecepientsActivity extends ListActivity {
 						else
 						{
 							Log.e(TAG, e.getMessage());
-							AlertDialog.Builder builder = new AlertDialog.Builder(RecepientsActivity.this);
+							AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
 							builder.setMessage(e.getMessage())
 								.setTitle(R.string.error_title)
 								.setPositiveButton(android.R.string.ok, null);
@@ -195,10 +195,10 @@ public class RecepientsActivity extends ListActivity {
 			public void done(ParseException e) {
 				if(e == null){
 					//success
-					Toast.makeText(RecepientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
+					Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
 				}
 				else {
-					AlertDialog.Builder builder = new AlertDialog.Builder(RecepientsActivity.this);
+					AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
 					builder.setMessage(R.string.error_sending_message)
 						.setTitle(R.string.error_selecting_file_title)
 						.setPositiveButton(android.R.string.ok, null);
