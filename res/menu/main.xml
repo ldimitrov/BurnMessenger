@@ -21,5 +21,12 @@
         android:title="@string/menu_camera_label"
         android:icon="@drawable/ic_action_camera"/>
     
+    <item
+        android:id="@+id/action_message"
+        android:orderInCategory="400"
+        android:showAsAction="always"
+        android:title="@string/menu_message_label"
+        android:icon="@drawable/ic_action_chat"/>
+    
 
 </menu>

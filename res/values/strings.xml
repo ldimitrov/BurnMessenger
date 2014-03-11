@@ -29,7 +29,8 @@
     <string name="error_external_storage">There was a problem accessing your device\'s external storage</string>
     <string name="general_error">Sorry there was an error!</string>
     <string name="action_send">Send</string>
-	
+    <string name="menu_message_label">Message</string>
+
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>
@@ -38,15 +39,11 @@
     </string-array>
 
     <string name="title_activity_recepients">Choose Recipients</string>
-
     <string name="empty_recepients_list_message">Choose some friends first!</string>
-
     <string name="error_selecting_file">There was an error with the selected file!</string>
-
     <string name="error_selecting_file_title">We are sorry!</string>
-
     <string name="success_message">Message sent!</string>
-
     <string name="error_sending_message">There was an error sending your message. Please try again.</string>
+    <string name="title_activity_compose_message">ComposeMessageActivity</string>
 
 </resources>
