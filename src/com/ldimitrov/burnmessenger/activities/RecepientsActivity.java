@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ldimitrov.burnmessenger.util.FileHelper;
+import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;

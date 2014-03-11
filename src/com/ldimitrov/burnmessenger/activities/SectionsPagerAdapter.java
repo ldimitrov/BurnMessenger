@@ -1,6 +1,7 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.activities;
 
 import java.util.Locale;
+
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

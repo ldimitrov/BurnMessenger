@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;

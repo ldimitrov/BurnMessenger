@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+
 
 import android.content.Context;
 import android.graphics.Bitmap;

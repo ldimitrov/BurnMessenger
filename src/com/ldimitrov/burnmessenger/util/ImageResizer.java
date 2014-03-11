@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

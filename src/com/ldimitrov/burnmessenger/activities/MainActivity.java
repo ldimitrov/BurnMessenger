@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.activities;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
@@ -253,6 +254,8 @@ public class MainActivity extends FragmentActivity implements
 				builder.setItems(R.array.camera_choices, mDialogListener);
 				AlertDialog dialog = builder.create();
 				dialog.show();
+			case R.id.action_message:
+				Intent messageIntent = new Intent(this, MainActivity.class);
 		}		
 		return super.onOptionsItemSelected(item);
 	}

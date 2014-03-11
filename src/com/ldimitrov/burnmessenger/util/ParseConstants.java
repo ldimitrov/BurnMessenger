@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger;
+package com.ldimitrov.burnmessenger.util;
 
 public final class ParseConstants {
 	// Class names

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ldimitrov.burnmessenger"
+    package="com.ldimitrov.burnmessenger.activities"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -23,7 +23,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ldimitrov.burnmessenger.MainActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -33,30 +33,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ldimitrov.burnmessenger.LoginActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ldimitrov.burnmessenger.SignUpActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName="com.ldimitrov.burnmessenger.LoginActivity"
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ldimitrov.burnmessenger.EditFriendsActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
-            android:parentActivityName="com.ldimitrov.burnmessenger.MainActivity"
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ldimitrov.burnmessenger.MainActivity" />
+                android:value="com.ldimitrov.burnmessenger.activities.MainActivity" />
         </activity>
         <activity
-            android:name="com.ldimitrov.burnmessenger.RecepientsActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.RecepientsActivity"
             android:label="@string/title_activity_recepients"
-            android:parentActivityName="com.ldimitrov.burnmessenger.MainActivity"
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
             android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ldimitrov.burnmessenger.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.ldimitrov.burnmessenger.activities.ComposeMessageActivity"
+            android:label="@string/title_activity_compose_message"
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
