@@ -36,8 +36,10 @@ public class MainActivity extends FragmentActivity implements
 	public static final int CHOOSE_PHOTO_REQUEST = 2;
 	public static final int CHOOSE_VIDEO_REQUEST = 3;
 	
-	public static final int MEDIA_TYPE_IMAGE = 4;
-	public static final int MEDIA_TYPE_VIDEO = 5;
+	public static final int MEDIA_TYPE_TEXT = 4;
+	public static final int MEDIA_TYPE_IMAGE = 5;
+	public static final int MEDIA_TYPE_VIDEO = 6;
+	
 	
 	protected Uri mMediaUri;
 	
@@ -207,7 +209,7 @@ public class MainActivity extends FragmentActivity implements
 				sendBroadcast(mediaScanIntent);
 			}		
 			
-			Intent recepientsIntent = new Intent(this, RecepientsActivity.class);
+			Intent recepientsIntent = new Intent(this, RecipientsActivity.class);
 			recepientsIntent.setData(mMediaUri);
 			//TODO - add checkes for video, message
 			String fileType;
@@ -255,7 +257,8 @@ public class MainActivity extends FragmentActivity implements
 				AlertDialog dialog = builder.create();
 				dialog.show();
 			case R.id.action_message:
-				Intent messageIntent = new Intent(this, MainActivity.class);
+				Intent recepientsIntent = new Intent(MainActivity.this, ComposeMessageActivity.class);
+				startActivity(recepientsIntent);
 		}		
 		return super.onOptionsItemSelected(item);
 	}

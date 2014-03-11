@@ -1,8 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ldimitrov.burnmessenger.activities.ComposeMessageActivity"
-    tools:ignore="MergeRootFrame" />
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:divider="@null"
+        android:dividerHeight="0.0sp"
+        android:drawSelectorOnTop="false"
+        android:fadingEdgeLength="8dp"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideInset"
+        android:smoothScrollbar="false"
+        android:stackFromBottom="true"
+        android:transcriptMode="normal" >
+    </ListView>
+
+    <include layout="@layout/compose_message_bar" />
+
+</LinearLayout>

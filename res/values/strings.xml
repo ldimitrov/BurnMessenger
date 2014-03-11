@@ -44,6 +44,9 @@
     <string name="error_selecting_file_title">We are sorry!</string>
     <string name="success_message">Message sent!</string>
     <string name="error_sending_message">There was an error sending your message. Please try again.</string>
-    <string name="title_activity_compose_message">ComposeMessageActivity</string>
+    <string name="title_activity_compose_message">Send the message</string>
+    <string name="hint_enter_text">Enter message</string>
+    <string name="button_send_message">Send message</string>
+    <string name="send_description">Send</string>
 
 </resources>

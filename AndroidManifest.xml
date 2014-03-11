@@ -53,7 +53,7 @@
                 android:value="com.ldimitrov.burnmessenger.activities.MainActivity" />
         </activity>
         <activity
-            android:name="com.ldimitrov.burnmessenger.activities.RecepientsActivity"
+            android:name="com.ldimitrov.burnmessenger.activities.RecipientsActivity"
             android:label="@string/title_activity_recepients"
             android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
             android:screenOrientation="portrait" >
@@ -63,8 +63,9 @@
         </activity>
         <activity
             android:name="com.ldimitrov.burnmessenger.activities.ComposeMessageActivity"
-            android:label="@string/title_activity_compose_message"
-            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity" >
+            android:label="@string/title_activity_compose_message" 
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />

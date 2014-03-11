@@ -11,7 +11,13 @@ public class ComposeMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compose_message);
+		setupActionBar();
 	}
+	
+	private void setupActionBar() {
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
