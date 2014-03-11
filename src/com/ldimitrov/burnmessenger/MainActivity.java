@@ -58,6 +58,9 @@ public class MainActivity extends FragmentActivity implements
 				case 1: // take video
 					break;
 				case 2: // choose picture
+					Intent choosePhotoIntent = new Intent(Intent.ACTION_GET_CONTENT); //for all types of content
+					choosePhotoIntent.setType("image/*"); //limit it to images
+					startActivityForResult(choosePhotoIntent, CHOOSE_PHOTO_REQUEST);
 					break;
 				case 3: // choose video
 					break;
@@ -187,11 +190,21 @@ public class MainActivity extends FragmentActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if(resultCode == RESULT_OK){
-			//success - add to galery
-			//broadcasting the result
-			Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-			mediaScanIntent.setData(mMediaUri);
-			sendBroadcast(mediaScanIntent);
+			if(requestCode == CHOOSE_PHOTO_REQUEST || requestCode == CHOOSE_VIDEO_REQUEST){
+				if(data == null) {
+					Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
+				}
+				else {
+					mMediaUri = data.getData();
+				}
+			}
+			else {
+				//success - add to galery
+				//broadcasting the result
+				Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+				mediaScanIntent.setData(mMediaUri);
+				sendBroadcast(mediaScanIntent);
+			}		
 			
 			Intent recepientsIntent = new Intent(this, RecepientsActivity.class);
 			recepientsIntent.setData(mMediaUri);
