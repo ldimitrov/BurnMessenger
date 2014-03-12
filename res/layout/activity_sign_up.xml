@@ -42,6 +42,6 @@
         android:layout_below="@+id/emailField"
         android:layout_marginTop="37dp"
         android:text="@string/sign_up_button_label"
- />
+        />
 
 </RelativeLayout>

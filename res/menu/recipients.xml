@@ -1,13 +1,11 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.ldimitrov.burnmessenger.RecipientsActivity" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
         android:id="@+id/action_send"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/action_send"
+        android:title="@string/menu_send_label"
         android:visible="false"
-        android:icon="@drawable/ic_action_send_now"/>
+        android:icon="@drawable/ic_action_send_now" />
 
 </menu>
