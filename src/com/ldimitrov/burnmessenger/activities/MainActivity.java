@@ -257,8 +257,7 @@ public class MainActivity extends FragmentActivity implements
 				AlertDialog dialog = builder.create();
 				dialog.show();
 			case R.id.action_message:
-				Intent recepientsIntent = new Intent(MainActivity.this, ComposeMessageActivity.class);
-				startActivity(recepientsIntent);
+
 		}		
 		return super.onOptionsItemSelected(item);
 	}

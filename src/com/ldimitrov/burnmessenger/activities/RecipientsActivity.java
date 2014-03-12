@@ -42,7 +42,7 @@ public class RecipientsActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_recepients);
+		setContentView(R.layout.activity_recipients);
 		setupActionBar();
 		
 		getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -106,7 +106,7 @@ public class RecipientsActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.recepients, menu);
+		getMenuInflater().inflate(R.menu.recipients, menu);
 		mSendMenuItem = menu.getItem(0);
 		return true;
 	}
