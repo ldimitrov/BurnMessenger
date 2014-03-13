@@ -2,6 +2,7 @@ package com.ldimitrov.burnmessenger.activities;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
@@ -39,13 +45,14 @@ public class MainActivity extends FragmentActivity implements
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int TAKE_VIDEO_REQUEST = 1;
-    public static final int PICK_PHOTO_REQUEST = 2;
-    public static final int PICK_VIDEO_REQUEST = 3;
+    public static final int TAKE_TEXT_REQUEST = 2;
+    public static final int PICK_PHOTO_REQUEST = 3;
+    public static final int PICK_VIDEO_REQUEST = 4;
 
-    public static final int MEDIA_TYPE_IMAGE = 4;
-    public static final int MEDIA_TYPE_VIDEO = 5;
+    public static final int MEDIA_TYPE_IMAGE = 5;
+    public static final int MEDIA_TYPE_VIDEO = 6;
 
-    public static final int FILE_SIZE_LIMIT = 1024*1024*10; // 10 MB
+    public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10; // 10 MB
 
     protected Uri mMediaUri;
 
@@ -53,7 +60,7 @@ public class MainActivity extends FragmentActivity implements
             new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    switch(which) {
+                    switch (which) {
                         case 0: // Take picture
                             Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -61,8 +68,7 @@ public class MainActivity extends FragmentActivity implements
                                 // display an error
                                 Toast.makeText(MainActivity.this, R.string.error_external_storage,
                                         Toast.LENGTH_LONG).show();
-                            }
-                            else {
+                            } else {
                                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                                 startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
                             }
@@ -92,8 +98,8 @@ public class MainActivity extends FragmentActivity implements
                                 appName);
 
                         // 2. Create our subdirectory
-                        if (! mediaStorageDir.exists()) {
-                            if (! mediaStorageDir.mkdirs()) {
+                        if (!mediaStorageDir.exists()) {
+                            if (!mediaStorageDir.mkdirs()) {
                                 Log.e(TAG, "Failed to create directory.");
                                 return null;
                             }
@@ -108,11 +114,9 @@ public class MainActivity extends FragmentActivity implements
                         String path = mediaStorageDir.getPath() + File.separator;
                         if (mediaType == MEDIA_TYPE_IMAGE) {
                             mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
-                        }
-                        else if (mediaType == MEDIA_TYPE_VIDEO) {
+                        } else if (mediaType == MEDIA_TYPE_VIDEO) {
                             mediaFile = new File(path + "VID_" + timestamp + ".mp4");
-                        }
-                        else {
+                        } else {
                             return null;
                         }
 
@@ -120,8 +124,7 @@ public class MainActivity extends FragmentActivity implements
 
                         // 5. Return the file's URI
                         return Uri.fromFile(mediaFile);
-                    }
-                    else {
+                    } else {
                         return null;
                     }
                 }
@@ -129,12 +132,7 @@ public class MainActivity extends FragmentActivity implements
                 private boolean isExternalStorageAvailable() {
                     String state = Environment.getExternalStorageState();
 
-                    if (state.equals(Environment.MEDIA_MOUNTED)) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
+                    return state.equals(Environment.MEDIA_MOUNTED);
                 }
             };
 
@@ -164,8 +162,7 @@ public class MainActivity extends FragmentActivity implements
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
             navigateToLogin();
-        }
-        else {
+        } else {
             Log.i(TAG, currentUser.getUsername());
         }
 
@@ -213,8 +210,7 @@ public class MainActivity extends FragmentActivity implements
             if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
                 if (data == null) {
                     Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     mMediaUri = data.getData();
                 }
 
@@ -227,16 +223,13 @@ public class MainActivity extends FragmentActivity implements
                     try {
                         inputStream = getContentResolver().openInputStream(mMediaUri);
                         fileSize = inputStream.available();
-                    }
-                    catch (FileNotFoundException e) {
+                    } catch (FileNotFoundException e) {
                         Toast.makeText(this, R.string.error_opening_file, Toast.LENGTH_LONG).show();
                         return;
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         Toast.makeText(this, R.string.error_opening_file, Toast.LENGTH_LONG).show();
                         return;
-                    }
-                    finally {
+                    } finally {
                         try {
                             inputStream.close();
                         } catch (IOException e) { /* Intentionally blank */ }
@@ -247,8 +240,7 @@ public class MainActivity extends FragmentActivity implements
                         return;
                     }
                 }
-            }
-            else {
+            } else {
                 Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 mediaScanIntent.setData(mMediaUri);
                 sendBroadcast(mediaScanIntent);
@@ -260,15 +252,15 @@ public class MainActivity extends FragmentActivity implements
             String fileType;
             if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST) {
                 fileType = ParseConstants.TYPE_IMAGE;
-            }
-            else {
+//            } else if(requestCode == PICK_VIDEO_REQUEST || requestCode == TAKE_VIDEO_REQUEST) {
+//                fileType = ParseConstants.TYPE_VIDEO;
+            } else {
                 fileType = ParseConstants.TYPE_VIDEO;
             }
 
             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
             startActivity(recipientsIntent);
-        }
-        else if (resultCode != RESULT_CANCELED) {
+        } else if (resultCode != RESULT_CANCELED) {
             Toast.makeText(this, R.string.general_error, Toast.LENGTH_LONG).show();
         }
     }
@@ -291,7 +283,7 @@ public class MainActivity extends FragmentActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
 
-        switch(itemId) {
+        switch (itemId) {
             case R.id.action_logout:
                 ParseUser.logOut();
                 navigateToLogin();
@@ -307,19 +299,34 @@ public class MainActivity extends FragmentActivity implements
                 dialog.show();
                 break;
             case R.id.action_message:
-                AlertDialog.Builder messageBuilder = new AlertDialog.Builder(this);
-                View view = LayoutInflater.from(this).inflate(R.layout.message_bar, (ViewGroup)findViewById(R.layout.activity_main));
-                messageBuilder.setView(view);         //.setItems(R.array.camera_choices, null);
-                AlertDialog messageDialog = messageBuilder.create();
+                final Dialog messageDialog = new Dialog(this);
+                messageDialog.setContentView(R.layout.message_bar);
                 messageDialog.show();
+
+                Button messageButton = (Button)messageDialog.findViewById(R.id.send_button);
+                messageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText messageText = (EditText) messageDialog.findViewById(R.id.edit_text_message);
+                        final String message = messageText.getText().toString();
+                        if (TextUtils.isEmpty(message)) {
+                            Toast.makeText(MainActivity.this, "Enter a message first!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
+                            recipientsIntent.putExtra(ParseConstants.TYPE_TEXT, message);
+                            startActivity(recipientsIntent);
+                            //startActivityForResult(recipientsIntent, TAKE_TEXT_REQUEST);
+                        }
+
+                    }
+                });
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
