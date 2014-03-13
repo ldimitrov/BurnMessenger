@@ -1,25 +1,25 @@
 package com.ldimitrov.burnmessenger.activities;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.ldimitrov.burnmessenger.util.ParseConstants;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
-import java.util.List;
 
 public class EditFriendsActivity extends ListActivity {
 
@@ -46,7 +46,11 @@ public class EditFriendsActivity extends ListActivity {
         super.onResume();
 
         mCurrentUser = ParseUser.getCurrentUser();
-        mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+        try {
+            mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
 
         setProgressBarIndeterminateVisibility(true);
 
@@ -92,7 +96,9 @@ public class EditFriendsActivity extends ListActivity {
      * Set up the {@link android.app.ActionBar}.
      */
     private void setupActionBar() {
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
@@ -136,25 +142,28 @@ public class EditFriendsActivity extends ListActivity {
     }
 
     private void addFriendCheckmarks() {
-        mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> friends, ParseException e) {
-                if (e == null) {
-                    // list returned - look for a match
-                    for (int i = 0; i < mUsers.size(); i++) {
-                        ParseUser user = mUsers.get(i);
+        try {
+            mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> friends, ParseException e) {
+                    if (e == null) {
+                        // list returned - look for a match
+                        for (int i = 0; i < mUsers.size(); i++) {
+                            ParseUser user = mUsers.get(i);
 
-                        for (ParseUser friend : friends) {
-                            if (friend.getObjectId().equals(user.getObjectId())) {
-                                getListView().setItemChecked(i, true);
+                            for (ParseUser friend : friends) {
+                                if (friend.getObjectId().equals(user.getObjectId())) {
+                                    getListView().setItemChecked(i, true);
+                                }
                             }
                         }
+                    } else {
+                        Log.e(TAG, e.getMessage());
                     }
                 }
-                else {
-                    Log.e(TAG, e.getMessage());
-                }
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 }

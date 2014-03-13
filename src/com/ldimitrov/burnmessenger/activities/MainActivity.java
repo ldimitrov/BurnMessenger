@@ -12,8 +12,11 @@ import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -292,34 +295,41 @@ public class MainActivity extends FragmentActivity implements
             case R.id.action_logout:
                 ParseUser.logOut();
                 navigateToLogin();
+                break;
             case R.id.action_edit_friends:
                 Intent intent = new Intent(this, EditFriendsActivity.class);
                 startActivity(intent);
+                break;
             case R.id.action_camera:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setItems(R.array.camera_choices, mDialogListener);
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                break;
+            case R.id.action_message:
+                AlertDialog.Builder messageBuilder = new AlertDialog.Builder(this);
+                View view = LayoutInflater.from(this).inflate(R.layout.message_bar, (ViewGroup)findViewById(R.layout.activity_main));
+                messageBuilder.setView(view);         //.setItems(R.array.camera_choices, null);
+                AlertDialog messageDialog = messageBuilder.create();
+                messageDialog.show();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab,
-                              FragmentTransaction fragmentTransaction) {
+    public void onTabSelected(ActionBar.Tab tab,FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab,
-                                FragmentTransaction fragmentTransaction) {
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab,
-                                FragmentTransaction fragmentTransaction) {
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 }
