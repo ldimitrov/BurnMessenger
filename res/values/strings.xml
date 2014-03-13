@@ -30,6 +30,8 @@
     <string name="video_size_limit_warning">The selected video must be less than 10 MB.</string>
     <string name="error_selecting_file">There was an error with the file selected. Please select a different file.</string>
     <string name="error_file_too_large">The selected file is too large! Select a new file.</string>
+    <string name="menu_chat_label">New Message</string>
+    <string name="send_message_hint">Enter Message</string>
 
     <string-array name="camera_choices">
         <item>Take Picture</item>

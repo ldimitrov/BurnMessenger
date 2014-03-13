@@ -2,12 +2,25 @@
 
     <item
         android:id="@+id/action_edit_friends"
+        android:menuCategory="system"
+        android:orderInCategory="10"
         android:title="@string/menu_edit_friends_label"></item>
     <item
         android:id="@+id/action_logout"
+        android:menuCategory="system"
+        android:orderInCategory="20"
         android:title="@string/menu_logout_label"></item>
     <item
+        android:id="@+id/action_message"
+        android:menuCategory="system"
+        android:orderInCategory="30"
+        android:icon="@drawable/ic_action_chat"
+        android:showAsAction="always"
+        android:title="@string/menu_chat_label"></item>
+    <item
         android:id="@+id/action_camera"
+        android:menuCategory="system"
+        android:orderInCategory="40"
         android:icon="@drawable/ic_action_camera"
         android:showAsAction="always"
         android:title="@string/menu_camera_label"></item>
