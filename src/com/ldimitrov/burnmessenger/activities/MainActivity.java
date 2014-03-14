@@ -140,6 +140,20 @@ public class MainActivity extends FragmentActivity implements
                     }
                     break;
                 case 1: // Take video
+                    Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
+                    if (mMediaUri == null) {
+                        // display an error
+                        Toast.makeText(MainActivity.this, R.string.error_external_storage,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
+                        //limit the duration of the video to 10 seconds
+                        videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                        //make videos with lowest quality - just for now
+                        videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+                        startActivityForResult(videoIntent, TAKE_VIDEO_REQUEST);
+                    }
                     break;
                 case 2: // Choose picture
                     Intent choosePhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
