@@ -45,96 +45,17 @@ public class MainActivity extends FragmentActivity implements
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int TAKE_VIDEO_REQUEST = 1;
-    public static final int TAKE_TEXT_REQUEST = 2;
+    public static final int SEND_TEXT_REQUEST = 2;
     public static final int PICK_PHOTO_REQUEST = 3;
     public static final int PICK_VIDEO_REQUEST = 4;
 
-    public static final int MEDIA_TYPE_IMAGE = 5;
-    public static final int MEDIA_TYPE_VIDEO = 6;
+    public static final int MEDIA_TYPE_TEXT = 5;
+    public static final int MEDIA_TYPE_IMAGE = 6;
+    public static final int MEDIA_TYPE_VIDEO = 7;
 
     public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10; // 10 MB
 
     protected Uri mMediaUri;
-
-    protected DialogInterface.OnClickListener mDialogListener =
-            new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0: // Take picture
-                            Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-                            if (mMediaUri == null) {
-                                // display an error
-                                Toast.makeText(MainActivity.this, R.string.error_external_storage,
-                                        Toast.LENGTH_LONG).show();
-                            } else {
-                                takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
-                                startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
-                            }
-                            break;
-                        case 1: // Take video
-                            break;
-                        case 2: // Choose picture
-                            Intent choosePhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                            choosePhotoIntent.setType("image/*");
-                            startActivityForResult(choosePhotoIntent, PICK_PHOTO_REQUEST);
-                            break;
-                        case 3: // Choose video
-                            break;
-                    }
-                }
-
-                private Uri getOutputMediaFileUri(int mediaType) {
-                    // To be safe, you should check that the SDCard is mounted
-                    // using Environment.getExternalStorageState() before doing this.
-                    if (isExternalStorageAvailable()) {
-                        // get the URI
-
-                        // 1. Get the external storage directory
-                        String appName = MainActivity.this.getString(R.string.app_name);
-                        File mediaStorageDir = new File(
-                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                                appName);
-
-                        // 2. Create our subdirectory
-                        if (!mediaStorageDir.exists()) {
-                            if (!mediaStorageDir.mkdirs()) {
-                                Log.e(TAG, "Failed to create directory.");
-                                return null;
-                            }
-                        }
-
-                        // 3. Create a file name
-                        // 4. Create the file
-                        File mediaFile;
-                        Date now = new Date();
-                        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(now);
-
-                        String path = mediaStorageDir.getPath() + File.separator;
-                        if (mediaType == MEDIA_TYPE_IMAGE) {
-                            mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
-                        } else if (mediaType == MEDIA_TYPE_VIDEO) {
-                            mediaFile = new File(path + "VID_" + timestamp + ".mp4");
-                        } else {
-                            return null;
-                        }
-
-                        Log.d(TAG, "File: " + Uri.fromFile(mediaFile));
-
-                        // 5. Return the file's URI
-                        return Uri.fromFile(mediaFile);
-                    } else {
-                        return null;
-                    }
-                }
-
-                private boolean isExternalStorageAvailable() {
-                    String state = Environment.getExternalStorageState();
-
-                    return state.equals(Environment.MEDIA_MOUNTED);
-                }
-            };
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -202,6 +123,85 @@ public class MainActivity extends FragmentActivity implements
         }
     }
 
+    protected DialogInterface.OnClickListener mDialogListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case 0: // Take picture
+                    Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (mMediaUri == null) {
+                        // display an error
+                        Toast.makeText(MainActivity.this, R.string.error_external_storage,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
+                        startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+                    }
+                    break;
+                case 1: // Take video
+                    break;
+                case 2: // Choose picture
+                    Intent choosePhotoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    choosePhotoIntent.setType("image/*");
+                    startActivityForResult(choosePhotoIntent, PICK_PHOTO_REQUEST);
+                    break;
+                case 3: // Choose video
+                    break;
+            }
+        }
+
+        private Uri getOutputMediaFileUri(int mediaType) {
+            // To be safe, you should check that the SDCard is mounted
+            // using Environment.getExternalStorageState() before doing this.
+            if (isExternalStorageAvailable()) {
+                // get the URI
+
+                // 1. Get the external storage directory
+                String appName = MainActivity.this.getString(R.string.app_name);
+                File mediaStorageDir = new File(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                        appName);
+
+                // 2. Create our subdirectory
+                if (!mediaStorageDir.exists()) {
+                    if (!mediaStorageDir.mkdirs()) {
+                        Log.e(TAG, "Failed to create directory.");
+                        return null;
+                    }
+                }
+
+                // 3. Create a file name
+                // 4. Create the file
+                File mediaFile;
+                Date now = new Date();
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(now);
+
+                String path = mediaStorageDir.getPath() + File.separator;
+                if (mediaType == MEDIA_TYPE_IMAGE) {
+                    mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
+                } else if (mediaType == MEDIA_TYPE_VIDEO) {
+                    mediaFile = new File(path + "VID_" + timestamp + ".mp4");
+                } else {
+                    return null;
+                }
+
+                Log.d(TAG, "File: " + Uri.fromFile(mediaFile));
+
+                // 5. Return the file's URI
+                return Uri.fromFile(mediaFile);
+            } else {
+                return null;
+            }
+        }
+
+        private boolean isExternalStorageAvailable() {
+            String state = Environment.getExternalStorageState();
+
+            return state.equals(Environment.MEDIA_MOUNTED);
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -252,10 +252,10 @@ public class MainActivity extends FragmentActivity implements
             String fileType;
             if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST) {
                 fileType = ParseConstants.TYPE_IMAGE;
-//            } else if(requestCode == PICK_VIDEO_REQUEST || requestCode == TAKE_VIDEO_REQUEST) {
-//                fileType = ParseConstants.TYPE_VIDEO;
-            } else {
+            } else if (requestCode == PICK_VIDEO_REQUEST || requestCode == TAKE_VIDEO_REQUEST) {
                 fileType = ParseConstants.TYPE_VIDEO;
+            } else {
+                fileType = ParseConstants.TYPE_TEXT;
             }
 
             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
@@ -301,9 +301,10 @@ public class MainActivity extends FragmentActivity implements
             case R.id.action_message:
                 final Dialog messageDialog = new Dialog(this);
                 messageDialog.setContentView(R.layout.message_bar);
+                messageDialog.setTitle(R.string.send_message_title);
                 messageDialog.show();
 
-                Button messageButton = (Button)messageDialog.findViewById(R.id.send_button);
+                Button messageButton = (Button) messageDialog.findViewById(R.id.send_button);
                 messageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -313,14 +314,39 @@ public class MainActivity extends FragmentActivity implements
                             Toast.makeText(MainActivity.this, "Enter a message first!", Toast.LENGTH_SHORT).show();
                         } else {
                             Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
-                            recipientsIntent.putExtra(ParseConstants.TYPE_TEXT, message);
+                            recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, message);
+                            recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
                             startActivity(recipientsIntent);
-                            //startActivityForResult(recipientsIntent, TAKE_TEXT_REQUEST);
                         }
-
                     }
                 });
                 break;
+
+//                //*********************************************************
+//                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//                alert.setTitle("Send Message.");
+//                alert.setMessage("Type your message below.");
+//                // Set an EditText view to get user input
+//                final EditText input = new EditText(this);
+//                alert.setView(input);
+//                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        String value = input.getText().toString();
+//                        Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
+//                        recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, value);
+//                        recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
+//                        startActivity(recipientsIntent);
+//                    }
+//                });
+//                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        // Canceled.
+//                    }
+//                });
+//                alert.show();
+                //******************************************************
+                //break;
+
         }
         return super.onOptionsItemSelected(item);
     }

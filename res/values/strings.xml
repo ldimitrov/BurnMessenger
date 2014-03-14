@@ -32,6 +32,7 @@
     <string name="error_file_too_large">The selected file is too large! Select a new file.</string>
     <string name="menu_chat_label">New Message</string>
     <string name="send_message_hint">Enter Message</string>
+    <string name="send_message_title">Enter your message!</string>
 
     <string-array name="camera_choices">
         <item>Take Picture</item>

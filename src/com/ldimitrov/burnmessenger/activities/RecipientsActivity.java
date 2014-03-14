@@ -38,6 +38,7 @@ public class RecipientsActivity extends ListActivity {
     protected MenuItem mSendMenuItem;
     protected Uri mMediaUri;
     protected String mFileType;
+    protected String mMyMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class RecipientsActivity extends ListActivity {
 
         mMediaUri = getIntent().getData();
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
+        mMyMessage = getIntent().getExtras().getString("theMessage");
     }
 
     @Override
@@ -74,7 +76,7 @@ public class RecipientsActivity extends ListActivity {
 
                     String[] usernames = new String[mFriends.size()];
                     int i = 0;
-                    for(ParseUser user : mFriends) {
+                    for (ParseUser user : mFriends) {
                         usernames[i] = user.getUsername();
                         i++;
                     }
@@ -83,8 +85,7 @@ public class RecipientsActivity extends ListActivity {
                             android.R.layout.simple_list_item_checked,
                             usernames);
                     setListAdapter(adapter);
-                }
-                else {
+                } else {
                     Log.e(TAG, e.getMessage());
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(e.getMessage())
@@ -135,8 +136,7 @@ public class RecipientsActivity extends ListActivity {
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else {
+                } else {
                     send(message);
                     finish();
                 }
@@ -151,8 +151,7 @@ public class RecipientsActivity extends ListActivity {
 
         if (l.getCheckedItemCount() > 0) {
             mSendMenuItem.setVisible(true);
-        }
-        else {
+        } else {
             mSendMenuItem.setVisible(false);
         }
     }
@@ -162,23 +161,28 @@ public class RecipientsActivity extends ListActivity {
         message.put(ParseConstants.KEY_SENDER_ID, ParseUser.getCurrentUser().getObjectId());
         message.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientIds());
+
         message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
 
-        byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
-
-        if (fileBytes == null) {
-            return null;
-        }
-        else {
-            if (mFileType.equals(ParseConstants.TYPE_IMAGE)) {
-                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-            }
-
-            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
-            ParseFile file = new ParseFile(fileName, fileBytes);
-            message.put(ParseConstants.KEY_FILE, file);
-
+        if (mFileType.equals(ParseConstants.TYPE_TEXT)) {
+            message.put("theMessage", mMyMessage);
+            message.put(ParseConstants.KEY_FILE_TYPE, "message");
             return message;
+        } else {
+
+            byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
+
+            if (fileBytes == null) {
+                return null;
+            } else {
+                if (mFileType.equals(ParseConstants.TYPE_IMAGE)) {
+                    fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+                }
+                String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+                ParseFile file = new ParseFile(fileName, fileBytes);
+                message.put(ParseConstants.KEY_FILE, file);
+                return message;
+            }
         }
     }
 
@@ -199,8 +203,7 @@ public class RecipientsActivity extends ListActivity {
                 if (e == null) {
                     // success!
                     Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(R.string.error_sending_message)
                             .setTitle(R.string.error_selecting_file_title)
