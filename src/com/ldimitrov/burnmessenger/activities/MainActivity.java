@@ -14,21 +14,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
-import com.ldimitrov.burnmessenger.util.ParseConstants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,13 +41,11 @@ public class MainActivity extends FragmentActivity implements
 
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int TAKE_VIDEO_REQUEST = 1;
-    public static final int SEND_TEXT_REQUEST = 2;
     public static final int PICK_PHOTO_REQUEST = 3;
     public static final int PICK_VIDEO_REQUEST = 4;
 
-    public static final int MEDIA_TYPE_TEXT = 5;
-    public static final int MEDIA_TYPE_IMAGE = 6;
-    public static final int MEDIA_TYPE_VIDEO = 7;
+    public static final int MEDIA_TYPE_IMAGE = 5;
+    public static final int MEDIA_TYPE_VIDEO = 6;
 
     public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10; // 10 MB
 
@@ -161,6 +155,10 @@ public class MainActivity extends FragmentActivity implements
                     startActivityForResult(choosePhotoIntent, PICK_PHOTO_REQUEST);
                     break;
                 case 3: // Choose video
+                    Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    chooseVideoIntent.setType("video/*");
+                    Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
+                    startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);
                     break;
             }
         }
@@ -235,7 +233,9 @@ public class MainActivity extends FragmentActivity implements
                     InputStream inputStream = null;
 
                     try {
+                        // get total number of bytes
                         inputStream = getContentResolver().openInputStream(mMediaUri);
+                        // total size needed
                         fileSize = inputStream.available();
                     } catch (FileNotFoundException e) {
                         Toast.makeText(this, R.string.error_opening_file, Toast.LENGTH_LONG).show();
