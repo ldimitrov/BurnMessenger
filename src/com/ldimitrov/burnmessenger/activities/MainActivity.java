@@ -317,6 +317,7 @@ public class MainActivity extends FragmentActivity implements
                             recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, message);
                             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
                             startActivity(recipientsIntent);
+                            messageDialog.hide();
                         }
                     }
                 });
