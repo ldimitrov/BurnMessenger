@@ -21,7 +21,7 @@
             android:gravity="bottom"
             android:hint="@string/send_message_hint"
             android:inputType="textCapSentences|textMultiLine"
-            android:maxLines="15"
+            android:maxLines="40"
             android:padding="10dp" />
 
         <Button
