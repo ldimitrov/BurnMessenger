@@ -317,36 +317,11 @@ public class MainActivity extends FragmentActivity implements
                             recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, message);
                             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
                             startActivity(recipientsIntent);
+                            messageDialog.hide();
                         }
                     }
                 });
                 break;
-
-//                //*********************************************************
-//                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//                alert.setTitle("Send Message.");
-//                alert.setMessage("Type your message below.");
-//                // Set an EditText view to get user input
-//                final EditText input = new EditText(this);
-//                alert.setView(input);
-//                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        String value = input.getText().toString();
-//                        Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
-//                        recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, value);
-//                        recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
-//                        startActivity(recipientsIntent);
-//                    }
-//                });
-//                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        // Canceled.
-//                    }
-//                });
-//                alert.show();
-                //******************************************************
-                //break;
-
         }
         return super.onOptionsItemSelected(item);
     }
