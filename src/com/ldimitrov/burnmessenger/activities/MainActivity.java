@@ -315,28 +315,8 @@ public class MainActivity extends FragmentActivity implements
                 dialog.show();
                 break;
             case R.id.action_message:
-                final Dialog messageDialog = new Dialog(this);
-                messageDialog.setContentView(R.layout.message_bar);
-                messageDialog.setTitle(R.string.send_message_title);
-                messageDialog.show();
-
-                Button messageButton = (Button) messageDialog.findViewById(R.id.send_button);
-                messageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        EditText messageText = (EditText) messageDialog.findViewById(R.id.edit_text_message);
-                        final String messageValue = messageText.getText().toString();
-                        if (TextUtils.isEmpty(messageValue)) {
-                            Toast.makeText(MainActivity.this, "Enter a message first!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
-                            recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, messageValue);
-                            recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
-                            startActivity(recipientsIntent);
-                            messageDialog.hide();
-                        }
-                    }
-                });
+                Intent sendMessageIntent = new Intent(MainActivity.this, SendMessageActivity.class);
+                startActivity(sendMessageIntent);
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -53,4 +53,6 @@
 
     <string name="icon_description">icon before each message</string>
 
+    <string name="title_activity_send_message">Send your message!</string>
+
 </resources>
