@@ -45,7 +45,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         } else if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_VIDEO)) {
             holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
         } else {
-            holder.iconImageView.setImageResource(R.drawable.ic_action_chat);
+            holder.iconImageView.setImageResource(R.drawable.ic_action_chat_light);
         }
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
 
