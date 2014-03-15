@@ -51,4 +51,6 @@
     <string name="success_message">Message sent!</string>
     <string name="error_sending_message">There was an error sending your message. Please try again.</string>
 
+    <string name="icon_description">icon before each message</string>
+
 </resources>
