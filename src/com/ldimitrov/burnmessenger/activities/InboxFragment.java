@@ -2,6 +2,8 @@ package com.ldimitrov.burnmessenger.activities;
 
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,8 +30,7 @@ public class InboxFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_inbox,
-                container, false);
+        View rootView = inflater.inflate(R.layout.fragment_inbox,container, false);
 
         return rootView;
     }
@@ -74,15 +75,30 @@ public class InboxFragment extends ListFragment {
         ParseObject message = mMessages.get(position);
         String messageType = message.getString(ParseConstants.KEY_FILE_TYPE);
         ParseFile file = message.getParseFile(ParseConstants.KEY_FILE);
-        Uri fileUri = Uri.parse(file.getUrl());
+        String senderName = message.getString(ParseConstants.KEY_SENDER_NAME);
+        String displayMessage = message.getString(ParseConstants.KEY_MESSAGE);
         if(messageType.equals(ParseConstants.TYPE_IMAGE)) {
+            Uri fileUri = Uri.parse(file.getUrl());
             Intent intent = new Intent(getActivity(), ViewImageActivity.class);
             intent.setData(fileUri);
             startActivity(intent);
         } else if (messageType.equals(ParseConstants.TYPE_VIDEO)) {
-
+            Uri fileUri = Uri.parse(file.getUrl());
+            Intent intent = new Intent(Intent.ACTION_VIEW, fileUri);
+            intent.setDataAndType(fileUri, "video/*");
+            startActivity(intent);
         } else {
+            //TODO - add this to a separate activity
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Message from: " + senderName);
+            builder.setMessage(displayMessage);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
 
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 }
