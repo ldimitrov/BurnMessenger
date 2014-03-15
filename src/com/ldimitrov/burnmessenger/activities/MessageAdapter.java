@@ -31,7 +31,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, parent, false);
             holder = new ViewHolder();
             holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
             holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
