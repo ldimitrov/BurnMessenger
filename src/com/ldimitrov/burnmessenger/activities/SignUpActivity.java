@@ -43,8 +43,8 @@ public class SignUpActivity extends Activity {
 
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-                    builder.setMessage(R.string.signup_error_message)
-                            .setTitle(R.string.signup_error_title)
+                    builder.setMessage(R.string.error_signup_message)
+                            .setTitle(R.string.error_signup_title)
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
@@ -72,7 +72,7 @@ public class SignUpActivity extends Activity {
                             else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setMessage(e.getMessage())
-                                        .setTitle(R.string.signup_error_title)
+                                        .setTitle(R.string.error_signup_title)
                                         .setPositiveButton(android.R.string.ok, null);
                                 AlertDialog dialog = builder.create();
                                 dialog.show();
