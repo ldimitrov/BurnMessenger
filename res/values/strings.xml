@@ -8,6 +8,7 @@
     <string name="title_activity_edit_friends">Edit Friends</string>
     <string name="title_activity_recipients">Choose Recipients</string>
     <string name="title_activity_send_message">Send your message!</string>
+    <string name="title_activity_view_image">Image</string>
     <string name="send_message_title">Enter your message!</string>
 
     <!-- menu items -->

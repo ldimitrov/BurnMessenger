@@ -67,9 +67,19 @@
             android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
             android:screenOrientation="portrait">
 
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.ldimitrov.burnmessenger.activities.MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ldimitrov.burnmessenger.activities.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".ViewImageActivity"
+            android:label="@string/title_activity_view_image"
+            android:parentActivityName="com.ldimitrov.burnmessenger.activities.MainActivity"
+            android:screenOrientation="portrait">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ldimitrov.burnmessenger.activities.MainActivity"/>
         </activity>
 
     </application>
