@@ -1,6 +1,8 @@
 package com.ldimitrov.burnmessenger.activities;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -33,6 +35,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
             holder = new ViewHolder();
             holder.iconImageView = (ImageView)convertView.findViewById(R.id.messageIcon);
             holder.nameLabel = (TextView)convertView.findViewById(R.id.senderLabel);
+            holder.sendTime = (TextView)convertView.findViewById(R.id.sendTime);
         }
         else {
             holder = (ViewHolder)convertView.getTag();
@@ -48,6 +51,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
             holder.iconImageView.setImageResource(R.drawable.ic_action_chat_light);
         }
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
+        holder.sendTime.setText(new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(message.getCreatedAt()));
 
         return convertView;
     }
@@ -55,5 +59,6 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
     private static class ViewHolder {
         ImageView iconImageView;
         TextView nameLabel;
+        TextView sendTime;
     }
 }
