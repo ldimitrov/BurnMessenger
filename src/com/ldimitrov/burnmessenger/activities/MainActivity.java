@@ -325,12 +325,12 @@ public class MainActivity extends FragmentActivity implements
                     @Override
                     public void onClick(View v) {
                         EditText messageText = (EditText) messageDialog.findViewById(R.id.edit_text_message);
-                        final String message = messageText.getText().toString();
-                        if (TextUtils.isEmpty(message)) {
+                        final String messageValue = messageText.getText().toString();
+                        if (TextUtils.isEmpty(messageValue)) {
                             Toast.makeText(MainActivity.this, "Enter a message first!", Toast.LENGTH_SHORT).show();
                         } else {
                             Intent recipientsIntent = new Intent(MainActivity.this, RecipientsActivity.class);
-                            recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, message);
+                            recipientsIntent.putExtra(ParseConstants.KEY_MESSAGE, messageValue);
                             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, ParseConstants.TYPE_TEXT);
                             startActivity(recipientsIntent);
                             messageDialog.hide();

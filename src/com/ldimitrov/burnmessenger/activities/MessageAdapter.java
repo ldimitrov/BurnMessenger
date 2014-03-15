@@ -33,12 +33,11 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
             holder = new ViewHolder();
-            holder.iconImageView = (ImageView)convertView.findViewById(R.id.messageIcon);
-            holder.nameLabel = (TextView)convertView.findViewById(R.id.senderLabel);
-            holder.sendTime = (TextView)convertView.findViewById(R.id.sendTime);
-        }
-        else {
-            holder = (ViewHolder)convertView.getTag();
+            holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
+            holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
+            holder.sendTime = (TextView) convertView.findViewById(R.id.sendTime);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
         ParseObject message = mMessages.get(position);
