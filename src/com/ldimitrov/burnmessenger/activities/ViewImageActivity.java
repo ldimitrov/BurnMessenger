@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.squareup.picasso.Picasso;
 
 public class ViewImageActivity extends Activity {
@@ -21,8 +22,10 @@ public class ViewImageActivity extends Activity {
         setContentView(R.layout.activity_view_image);
 
         setupActionBar();
+        String senderName = getIntent().getExtras().getString(ParseConstants.KEY_SENDER_NAME);
+        setTitle("Image from " + senderName);
 
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         Uri imageUri = getIntent().getData();
         // getting images from the web .. android does not support that by defaul - DAFUQ

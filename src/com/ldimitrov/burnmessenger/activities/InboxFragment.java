@@ -81,6 +81,7 @@ public class InboxFragment extends ListFragment {
             Uri fileUri = Uri.parse(file.getUrl());
             Intent intent = new Intent(getActivity(), ViewImageActivity.class);
             intent.setData(fileUri);
+            intent.putExtra(ParseConstants.KEY_SENDER_NAME, senderName);
             startActivity(intent);
         } else if (messageType.equals(ParseConstants.TYPE_VIDEO)) {
             Uri fileUri = Uri.parse(file.getUrl());
