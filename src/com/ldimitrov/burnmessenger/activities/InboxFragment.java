@@ -59,10 +59,17 @@ public class InboxFragment extends ListFragment {
                         msgs[i] = message.getString(ParseConstants.KEY_SENDER_NAME);
                         i++;
                     }
+                    //check if adapter is empty, if not created it
+                    // this saves creating the adapter every time
+                    if(getListView().getAdapter() == null) {
                     MessageAdapter adapter = new MessageAdapter(
                             getListView().getContext(),
                             mMessages);
                     setListAdapter(adapter);
+                    } else {
+                        //refill adapter
+                        ((MessageAdapter)getListView().getAdapter()).refill(mMessages);
+                    }
                 }
             }
         });
