@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger.activities;
+package com.ldimitrov.burnmessenger.com.ldimitrov.burnmessenger.adapters;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ldimitrov.burnmessenger.activities.R;
 import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.ParseObject;
 

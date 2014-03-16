@@ -37,7 +37,7 @@ public class ViewImageActivity extends Activity {
         //TODO set progress bar here
         //setProgressBarIndeterminateVisibility(true);
         Picasso.with(this).load(imageUri.toString()).into(imageView);
-
+        //TODO - this is not the proper place to set timer for messages.
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

@@ -2,7 +2,6 @@ package com.ldimitrov.burnmessenger.activities;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,19 +11,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ldimitrov.burnmessenger.com.ldimitrov.burnmessenger.adapters.SectionsPagerAdapter;
 import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -33,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends FragmentActivity implements
