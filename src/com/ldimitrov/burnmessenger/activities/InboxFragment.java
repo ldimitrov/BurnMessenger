@@ -1,5 +1,6 @@
 package com.ldimitrov.burnmessenger.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -108,5 +109,27 @@ public class InboxFragment extends ListFragment {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+
+        // Delete message
+        List<String> ids = message.getList(ParseConstants.KEY_RECIPIENT_IDS);
+        // check count of recipients:
+        // - if there is only one - delete the whole message
+        // - if there is more than one - remove the recipient id only and save change - so other recipients can still view the message.
+
+        if(ids.size() == 1){
+            // last recipient - delete the whole message!
+            message.deleteInBackground();
+        } else {
+            // remove the current recipient only and save
+            ids.remove(ParseUser.getCurrentUser().getObjectId());
+
+            ArrayList<String> idsToRemove = new ArrayList<String>();
+            idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
+
+            message.removeAll(ParseConstants.KEY_RECIPIENT_IDS, idsToRemove);
+            //TODO - delete files from Parse
+            message.saveInBackground();
+        }
+
     }
 }
