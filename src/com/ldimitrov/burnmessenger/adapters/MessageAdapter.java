@@ -1,4 +1,4 @@
-package com.ldimitrov.burnmessenger.com.ldimitrov.burnmessenger.adapters;
+package com.ldimitrov.burnmessenger.adapters;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;

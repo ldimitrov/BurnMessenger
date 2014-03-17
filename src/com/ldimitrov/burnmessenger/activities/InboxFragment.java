@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.ldimitrov.burnmessenger.com.ldimitrov.burnmessenger.adapters.MessageAdapter;
+import com.ldimitrov.burnmessenger.adapters.MessageAdapter;
 import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;

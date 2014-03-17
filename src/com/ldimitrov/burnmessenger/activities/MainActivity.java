@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.ldimitrov.burnmessenger.com.ldimitrov.burnmessenger.adapters.SectionsPagerAdapter;
+import com.ldimitrov.burnmessenger.adapters.SectionsPagerAdapter;
 import com.ldimitrov.burnmessenger.util.ParseConstants;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
