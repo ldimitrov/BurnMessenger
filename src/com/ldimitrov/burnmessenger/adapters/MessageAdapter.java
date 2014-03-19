@@ -1,21 +1,16 @@
 package com.ldimitrov.burnmessenger.adapters;
 
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ldimitrov.burnmessenger.activities.R;
 import com.ldimitrov.burnmessenger.util.ParseConstants;

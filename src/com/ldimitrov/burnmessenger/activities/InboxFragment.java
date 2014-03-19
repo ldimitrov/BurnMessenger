@@ -80,9 +80,9 @@ public class InboxFragment extends ListFragment {
         super.onListItemClick(list, view, position, id);
         //TODO - start timer once the image or video is downloaded
         AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
-        builder.setTitle("Self-Destruction!");
-        builder.setMessage("The message you are about to see will self-destruct in 10 seconds after opening!");
-        builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.self_destruct_title);
+        builder.setMessage(R.string.message_destruct_label);
+        builder.setPositiveButton(R.string.button_proceed, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
 

@@ -45,7 +45,7 @@ public class ViewImageActivity extends Activity {
                 //after 10 seconds, finish this activity here and go back to parent activity
                 finish();
             }
-        },10*1000);
+        },6*10*1000);
     }
 
     private void setupActionBar() {
