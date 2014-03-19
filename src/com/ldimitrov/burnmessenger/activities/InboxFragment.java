@@ -84,8 +84,7 @@ public class InboxFragment extends ListFragment {
         builder.setMessage(R.string.message_destruct_label);
         builder.setPositiveButton(R.string.button_proceed, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-
-
+            	
                 ParseObject message = mMessages.get(position);
                 String messageType = message.getString(ParseConstants.KEY_FILE_TYPE);
                 ParseFile file = message.getParseFile(ParseConstants.KEY_FILE);
@@ -102,9 +101,13 @@ public class InboxFragment extends ListFragment {
                     Intent intent = new Intent(Intent.ACTION_VIEW, fileUri);
                     intent.setDataAndType(fileUri, "video/*");
                     startActivity(intent);
-                } else {
-                    //TODO - add this to a separate activity
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                } else if (messageType.equals(ParseConstants.TYPE_TEXT)){
+                	Intent messageIntent = new Intent(getActivity(), ViewMessageActivity.class);
+                	messageIntent.putExtra(ParseConstants.KEY_MESSAGE, displayMessage);
+                	messageIntent.putExtra(ParseConstants.KEY_SENDER_NAME, senderName);
+                	startActivity(messageIntent);                	
+                	
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Message from: " + senderName);
                     builder.setMessage(displayMessage);
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -113,7 +116,7 @@ public class InboxFragment extends ListFragment {
                         }
                     });
                     AlertDialog messageDialog = builder.create();
-                    messageDialog.show();
+                    messageDialog.show();*/
                 }
 
 
