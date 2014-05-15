@@ -63,6 +63,9 @@
         <item>Choose Video</item>
     </string-array>
 
+    <!-- push notifications -->
+    <string name="push_message">You\'ve got a new message from %s!</string>
+
     <string name="message_destruct_label">The message you are about to see will self-destruct in 1 minute after opening!</string>
     <string name="self_destruct_title">Self-Destruction!</string>
     <string name="button_proceed">Proceed</string>
@@ -71,5 +74,6 @@
     <string name="self_destruct_label">Message will self-destruct in:</string>
     <string name="countdown_timer">countdown timer</string>
     <string name="self_destructed_toast">This message self-destructed!</string>
+
 
 </resources>
