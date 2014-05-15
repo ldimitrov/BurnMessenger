@@ -2,15 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity$DummySectionFragment" >
+    tools:context=".MainActivity$DummySectionFragment">
 
-    <ListView
-        android:id="@android:id/list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-    </ListView>
+        android:layout_alignParentTop="true">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@android:id/empty"
