@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="swipeRefresh1"></color>
-    <color name="swipeRefresh2"></color>
-    <color name="swipeRefresh3"></color>
-    <color name="swipeRefresh4"></color>
+    <color name="swipeRefresh1">#33B5E5</color>
+    <color name="swipeRefresh2">#99CC00</color>
+    <color name="swipeRefresh3">#FFBB33</color>
+    <color name="swipeRefresh4">#FF4444</color>
 </resources>
