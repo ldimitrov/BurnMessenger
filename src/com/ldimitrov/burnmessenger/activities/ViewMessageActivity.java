@@ -1,8 +1,5 @@
 package com.ldimitrov.burnmessenger.activities;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,10 +7,14 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldimitrov.burnmessenger.util.ParseConstants;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ViewMessageActivity extends Activity {
 
@@ -27,15 +28,14 @@ public class ViewMessageActivity extends Activity {
 		setupActionBar();
 		String senderName = getIntent().getStringExtra(ParseConstants.KEY_SENDER_NAME);
 		String message = getIntent().getStringExtra(ParseConstants.KEY_MESSAGE);
-		// String senderName =
-		// getIntent().getExtras().getString(ParseConstants.KEY_SENDER_NAME);
-		// String message =
-		// getIntent().getExtras().getString(ParseConstants.KEY_MESSAGE);
+
 		setTitle("Message from " + senderName);
 		TextView messageText = (TextView) findViewById(R.id.message_text);
 		messageText.setText(message);
 
-		
+        //disable screenshot ability
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+
 		final TextView countDownTimer = (TextView)findViewById(R.id.countdown);
 
 		// TODO - this is not the proper place to set timer for messages.

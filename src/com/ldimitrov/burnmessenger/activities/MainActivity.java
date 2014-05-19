@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ldimitrov.burnmessenger.adapters.SectionsPagerAdapter;
@@ -76,6 +77,9 @@ public class MainActivity extends FragmentActivity implements
         } else {
             Log.i(TAG, currentUser.getUsername());
         }
+
+        //disable screenshot ability
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();

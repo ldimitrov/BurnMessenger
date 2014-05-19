@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.ldimitrov.burnmessenger.util.ParseConstants;
@@ -23,6 +24,9 @@ public class ViewImageActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_view_image);
+
+        //disable screenshot ability
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         setupActionBar();
         String senderName = getIntent().getExtras().getString(ParseConstants.KEY_SENDER_NAME);

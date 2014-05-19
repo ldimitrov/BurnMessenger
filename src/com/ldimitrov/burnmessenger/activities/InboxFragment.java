@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.ldimitrov.burnmessenger.adapters.MessageAdapter;
@@ -40,6 +41,9 @@ public class InboxFragment extends ListFragment {
                 R.color.swipeRefresh2,
                 R.color.swipeRefresh3,
                 R.color.swipeRefresh4);
+
+        //disable screenshot ability
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         return rootView;
     }
