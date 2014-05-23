@@ -1,6 +1,8 @@
 package com.ldimitrov.burnmessenger.activities;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.NavUtils;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.ldimitrov.burnmessenger.util.ParseConstants;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,8 +32,17 @@ public class ViewMessageActivity extends Activity {
 		String senderName = getIntent().getStringExtra(ParseConstants.KEY_SENDER_NAME);
 		String message = getIntent().getStringExtra(ParseConstants.KEY_MESSAGE);
 
+        Random random = new Random();
+        final float hue = random.nextFloat();
+        final float saturation = (random.nextInt(2000) + 1000) / 10000f;
+        final float luminance = 0.9f;
+
+
 		setTitle("Message from " + senderName);
 		TextView messageText = (TextView) findViewById(R.id.message_text);
+        Typeface font = Typeface.createFromAsset(getAssets(), "Erpresung.TTF");
+        messageText.setTypeface(font);
+        messageText.setTextColor(Color.HSVToColor(new float[] {hue, saturation, luminance}));
 		messageText.setText(message);
 
         //disable screenshot ability
