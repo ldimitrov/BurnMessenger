@@ -15,7 +15,8 @@ public class BurnMessengerApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Parse.initialize(this, "EgWS4wnqEX5hxmMTOEBp5axx9GcczodBR02CPORM", "nAXp60HEL4Suk3roA5tNmviuLihTCAyujGeXY5Sn");
+		// make sure to change the "#..#" with the actualy keys obtained from Parse.com after registration!
+		Parse.initialize(this, "####################################", "#####################################");
         PushService.setDefaultPushCallback(this, MainActivity.class, R.drawable.ic_stat_ic_launcher);
         ParseInstallation.getCurrentInstallation().saveInBackground();
 	}
